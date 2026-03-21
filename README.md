@@ -40,8 +40,8 @@ A powerful voice-based AI assistant that transcribes speech, generates intellige
 Before running the app, ensure you have:
 
 - **Python 3.8 or higher**
-- **Groq API Key** - [Get it here](https://console.groq.com/)
-- **GitHub Token** (with access to GitHub Models) - [Get it here](https://github.com/settings/tokens)
+- **Groq API Key** 
+- **GitHub Token** (with access to GitHub Models) 
 
 ---
 
