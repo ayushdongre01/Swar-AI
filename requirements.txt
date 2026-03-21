@@ -1,0 +1,6 @@
+streamlit
+audio-recorder-streamlit
+groq
+azure-ai-inference
+azure-core
+gtts
