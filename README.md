@@ -18,7 +18,7 @@ A powerful voice-based AI assistant that transcribes speech, generates intellige
 ## 🌐 Live Demo
 
 👉 Try the app here:  
-🔗 [https://blogflow-ai.streamlit.app/](https://blogflow-ai.streamlit.app/)
+🔗 [https://swar-ai.streamlit.app/](https://swar-ai.streamlit.app/)
 
 ---
 
@@ -289,7 +289,6 @@ Contributions are welcome! Feel free to:
 
 ## 🔗 Links
 
-- 🌐 **Live Demo**: [https://blogflow-ai.streamlit.app/](https://blogflow-ai.streamlit.app/)
 - 📖 **Streamlit Docs**: https://docs.streamlit.io/
 - 🤖 **Groq Documentation**: https://console.groq.com/docs
 - 🧠 **DeepSeek Model**: https://deepseek.com/
