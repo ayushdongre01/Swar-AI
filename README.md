@@ -6,12 +6,12 @@ A powerful voice-based AI assistant that transcribes speech, generates intellige
 
 ## 🚀 Features
 
-✨ **Speech-to-Text**: Real-time audio transcription using Groq's Whisper Large V3 model
-🧠 **AI-Powered Responses**: Intelligent conversational responses via Groq's GPT-OSS 120B
-🔊 **Text-to-Speech**: Automatic voice generation of AI responses using gTTS
-🎙️ **Voice Recording**: Built-in audio recorder directly in the web interface
-📱 **Responsive UI**: Clean, modern interface with interactive cards
-⚡ **Fast Processing**: Optimized for quick responses
+✨ **Speech-to-Text**: Real-time audio transcription using Groq's Whisper Large V3 model  
+🧠 **AI-Powered Responses**: Intelligent conversational responses via Groq's GPT-OSS 120B  
+🔊 **Text-to-Speech**: Automatic voice generation of AI responses using gTTS  
+🎙️ **Voice Recording**: Built-in audio recorder directly in the web interface  
+📱 **Responsive UI**: Clean, modern interface with interactive cards  
+⚡ **Fast Processing**: Optimized for quick responses  
 
 ---
 
