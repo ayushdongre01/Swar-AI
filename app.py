@@ -5,11 +5,6 @@ import base64
 
 from groq import Groq
 
-# DeepSeek via GitHub Models
-from azure.ai.inference import ChatCompletionsClient
-from azure.ai.inference.models import SystemMessage, UserMessage
-from azure.core.credentials import AzureKeyCredential
-
 # Free TTS
 from gtts import gTTS
 
@@ -30,26 +25,29 @@ def transcribe_audio_groq(groq_api_key, audio_path):
     return transcription.text
 
 
-# ------------------ DEEPSEEK RESPONSE ------------------
+# ------------------ AI RESPONSE (GROQ) ------------------
 
-def fetch_ai_response(github_token, input_text):
-    client = ChatCompletionsClient(
-        endpoint="https://models.github.ai/inference",
-        credential=AzureKeyCredential(github_token),
-    )
+def fetch_ai_response(groq_api_key, input_text):
+    client = Groq(api_key=groq_api_key)
 
-    response = client.complete(
+    completion = client.chat.completions.create(
+        model="openai/gpt-oss-120b",
         messages=[
-            SystemMessage("You are a helpful voice assistant. Keep responses concise and conversational."),
-            UserMessage(input_text),
+            {
+                "role": "system",
+                "content": "You are a helpful voice assistant. Keep responses concise and conversational."
+            },
+            {
+                "role": "user",
+                "content": input_text
+            }
         ],
         temperature=0.7,
         top_p=0.9,
         max_tokens=1024,
-        model="deepseek/DeepSeek-V3-0324"
     )
 
-    return response.choices[0].message.content
+    return completion.choices[0].message.content
 
 
 # ------------------ TEXT TO SPEECH (gTTS) ------------------
@@ -90,12 +88,11 @@ def main():
     st.sidebar.title("🔑 API CONFIG")
 
     groq_api_key = st.sidebar.text_input("Groq API Key", type="password")
-    github_token = st.sidebar.text_input("GitHub Token (DeepSeek)", type="password")
 
-    st.title("🎤 Swar AI (Whisper Large v3 + DeepSeek)")
+    st.title("🎤 Swar AI (Whisper Large v3 + GPT-OSS 120B)")
     st.write("Speak → Transcribe → AI Response → Voice Output 🚀")
 
-    if groq_api_key and github_token:
+    if groq_api_key:
 
         recorded_audio = audio_recorder()
 
@@ -117,13 +114,13 @@ def main():
                     st.error(f"Transcription Error: {e}")
                     return
 
-            # 🧠 DeepSeek Response
+            # 🧠 AI Response
             with st.spinner("Generating AI response..."):
                 try:
-                    ai_response = fetch_ai_response(github_token, transcribed_text)
+                    ai_response = fetch_ai_response(groq_api_key, transcribed_text)
                     create_text_card(ai_response, "🤖 AI Response")
                 except Exception as e:
-                    st.error(f"DeepSeek Error: {e}")
+                    st.error(f"AI Response Error: {e}")
                     return
 
             # 🔊 Text → Speech
@@ -136,7 +133,7 @@ def main():
                     st.error(f"TTS Error: {e}")
 
     else:
-        st.warning("Please enter both API keys to continue.")
+        st.warning("Please enter your Groq API key to continue.")
 
 
 if __name__ == "__main__":
