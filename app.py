@@ -85,12 +85,14 @@ def auto_play_audio(audio_file):
 def main():
     st.set_page_config(layout="wide")
 
-    st.sidebar.title("🔑 API CONFIG")
-
-    groq_api_key = st.sidebar.text_input("Groq API Key", type="password")
+    groq_api_key = st.secrets.get("GROQ", os.environ.get("GROQ"))
 
     st.title("🎤 Swar AI (Whisper Large v3 + GPT-OSS 120B)")
     st.write("Speak → Transcribe → AI Response → Voice Output 🚀")
+
+    if not groq_api_key:
+        st.error("GROQ key not found. Please add it to Streamlit secrets.")
+        return
 
     if groq_api_key:
 
@@ -131,9 +133,6 @@ def main():
                     auto_play_audio(response_audio_file)
                 except Exception as e:
                     st.error(f"TTS Error: {e}")
-
-    else:
-        st.warning("Please enter your Groq API key to continue.")
 
 
 if __name__ == "__main__":
